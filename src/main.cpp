@@ -1,6 +1,7 @@
 
 #include <cstdio>
 #include <sapi/sys.hpp>
+#include <sapi/var.hpp>
 #include "StringTest.hpp"
 #include "ContainerTest.hpp"
 
@@ -9,9 +10,27 @@ bool handle_tests(const Cli & cli);
 int main(int argc, char * argv[]){
 	Cli cli(argc, argv, SOS_GIT_HASH);
 
+#if defined __link
+
+	String path = cli.get_option("path");
+	Vector<String> directories = Dir::read_list(path);
+	Printer p;
+
+	for(u32 i=0; i < directories.count(); i++){
+		if( directories.at(i).find("build_") != String::npos && directories.at(i).find("_link") == String::npos){
+			FileInfo info;
+			info = File::get_info(String() << path << "/" << directories.at(i) << "/cpptest");
+			p.info("'%s' is %d", directories.at(i).cstring(), info.size());
+		}
+	}
+
+#else
+
 	if( handle_tests(cli) ){
 		exit(0);
 	}
+
+#endif
 
 	return 0;
 }

@@ -29,6 +29,10 @@ get_filename_component(SOS_NAME ${CMAKE_SOURCE_DIR} NAME)
 project(${SOS_NAME} CXX C)
 
 if( ${SOS_BUILD_CONFIG} STREQUAL arm )
+	set(SOS_DEFINITIONS BASELINE)
+	set(SOS_CONFIG BASELINE_TEST_release)
+	include(${SOS_TOOLCHAIN_CMAKE_PATH}/sos-app-std.cmake)
+
 	set(SOS_DEFINITIONS ARRAY_TEST)
 	set(SOS_CONFIG ARRAY_TEST_release)
 	include(${SOS_TOOLCHAIN_CMAKE_PATH}/sos-app-std.cmake)
@@ -85,5 +89,6 @@ elseif( ${SOS_BUILD_CONFIG} STREQUAL link )
 	#This will compile natively. If the program uses hardware, it can "link" to a board over USB
 	set(SOS_ARCH link)
 	set(SOS_CONFIG release)
+	set(SOS_LIBRARIES jansson sgfx)
 	include(${SOS_TOOLCHAIN_CMAKE_PATH}/sos-app.cmake)
 endif()
