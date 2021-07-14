@@ -51,7 +51,11 @@ bool handle_tests(const Cli & cli){
 			o_execute_flags = Test::EXECUTE_ALL;
 		}
 
-		Test::initialize(cli.name(), cli.version(), SOS_GIT_HASH);
+		Test::initialize(
+					Test::Name(cli.name()),
+					Test::VersionEncodedString(cli.version()),
+					Test::GitHash(SOS_GIT_HASH)
+					);
 
 #if defined STRING_TEST
 		if( cli.get_option("string") == "true" ){

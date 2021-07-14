@@ -147,6 +147,26 @@ bool ContainerTest::execute_list_api_case(){
 }
 
 bool ContainerTest::execute_map_api_case(){
+	map<string, string> string_string_map;
+
+	string_string_map.insert(pair<string, string>("test0", "value"));
+	string_string_map.insert(pair<string, string>("test1", "value"));
+	string_string_map.insert(pair<string, string>("test2", "value"));
+	string_string_map.insert(pair<string, string>("test3", "value"));
+	string_string_map.insert(pair<string, string>("test4", "value"));
+	string_string_map.insert(pair<string, string>("test5", "value"));
+	print_case_message("test value is %s", string_string_map.at("test0").c_str());
+
+	map<string, int> string_int_map;
+	string_int_map.insert(pair<string, int>("test0", 0));
+	string_int_map.insert(pair<string, int>("test1", 1));
+	string_int_map.insert(pair<string, int>("test2", 2));
+	string_int_map.insert(pair<string, int>("test3", 3));
+	string_int_map.insert(pair<string, int>("test4", 4));
+	string_int_map.insert(pair<string, int>("test5", 5));
+	print_case_message("test value is %d", string_int_map.at("test0"));
+
+
 	return case_result();
 }
 
